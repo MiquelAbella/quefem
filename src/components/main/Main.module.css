@@ -1,0 +1,18 @@
+.addButton {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 2vh;
+  z-index: 2;
+}
+
+.addButtonImg {
+  background-color: rgb(26, 26, 26);
+  border-radius: 50%;
+  height: 8vh;
+}
+
+.msg {
+  margin-top: 10vh;
+  color: rgb(230, 230, 230);
+}

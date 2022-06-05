@@ -1,0 +1,39 @@
+.nav {
+  margin-top: 2vh;
+  width: 90%;
+  height: 6vh;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  list-style: none;
+  cursor: pointer;
+}
+
+.filter {
+  font-size: medium;
+  color: rgba(255, 255, 255, 0.75);
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.filter * {
+  color: grey;
+  font-size: small;
+}
