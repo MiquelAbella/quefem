@@ -26,7 +26,7 @@ export const Event = ({ event, user, setEventToUpdate, setCurrentEvent }) => {
       <h4 className={styles.title}>{event.title}</h4>
       <h5 className={styles.place}>{event.place}</h5>
       <button onClick={handleSetCurrentEvent} className={styles.info}>
-        &#128065;
+        +
       </button>
       {user && event.owner === user.uid ? (
         <button onClick={handleSetEventToUpdate} className={styles.editButton}>
