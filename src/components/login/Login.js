@@ -24,12 +24,12 @@ export const Login = ({ setIsLoginShown, setUser }) => {
 
   const handleSubmitLogin = () => {
     axios
-      .post("http://localhost:5000/loginUser", loginValues)
+      .post("https://quefem.herokuapp.com/loginUser", loginValues)
       .then((res) => setUser(res.data.user));
   };
   const handleSubmitRegister = () => {
     axios
-      .post("http://localhost:5000/createUser", registerValues)
+      .post("https://quefem.herokuapp.com/createUser", registerValues)
       .then((res) => setUser(res.data.user));
   };
 

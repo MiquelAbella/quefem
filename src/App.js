@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/getEvents")
+      .get("https://quefem.herokuapp.com/getEvents")
       .then((res) => {
         if (res.data.ok) {
           setEventsList(
