@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/quefem/static/css/main.4ad27069.css",
-    "main.js": "/quefem/static/js/main.7133555a.js",
+    "main.js": "/quefem/static/js/main.447081d2.js",
     "static/js/787.cda612ba.chunk.js": "/quefem/static/js/787.cda612ba.chunk.js",
     "service-worker.js": "/quefem/service-worker.js",
     "static/media/addButton.png": "/quefem/static/media/addButton.009dd6260a537eaf450b.png",
     "static/media/editButton.png": "/quefem/static/media/editButton.e3ef86738a15ac40163f.png",
     "index.html": "/quefem/index.html",
     "main.4ad27069.css.map": "/quefem/static/css/main.4ad27069.css.map",
-    "main.7133555a.js.map": "/quefem/static/js/main.7133555a.js.map",
+    "main.447081d2.js.map": "/quefem/static/js/main.447081d2.js.map",
     "787.cda612ba.chunk.js.map": "/quefem/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4ad27069.css",
-    "static/js/main.7133555a.js"
+    "static/js/main.447081d2.js"
   ]
 }
