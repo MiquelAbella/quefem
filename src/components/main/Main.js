@@ -59,7 +59,7 @@ export const Main = ({
 
       {user ? (
         <Link className={styles.addButton} to="/afegir">
-          <img className={styles.addButtonImg} src={addButton} />
+          <img alt="" className={styles.addButtonImg} src={addButton} />
         </Link>
       ) : null}
     </div>

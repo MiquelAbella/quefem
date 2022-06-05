@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Event.module.css";
 import editButton from "../../assets/editButton.png";
 import { useNavigate } from "react-router-dom";
@@ -30,7 +30,7 @@ export const Event = ({ event, user, setEventToUpdate, setCurrentEvent }) => {
       </button>
       {user && event.owner === user.uid ? (
         <button onClick={handleSetEventToUpdate} className={styles.editButton}>
-          <img className={styles.editButtonImg} src={editButton} />
+          <img alt="" className={styles.editButtonImg} src={editButton} />
         </button>
       ) : null}
     </div>

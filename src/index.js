@@ -5,17 +5,17 @@ import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { Main } from "./components/main/Main";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
+  <HashRouter>
     <Routes>
       <Route path="*" element={<App />}>
         <Route index element={<Main />} />
       </Route>
     </Routes>
-  </BrowserRouter>
+  </HashRouter>
 );
 
 // If you want your app to work offline and load faster, you can change

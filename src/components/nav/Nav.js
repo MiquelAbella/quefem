@@ -1,25 +1,12 @@
 import React from "react";
 import styles from "./Nav.module.css";
-import { Link } from "react-router-dom";
 
 export const Nav = ({
   setIsLoginShown,
-  setEventsList,
-  eventsList,
-  allEvents,
   setFilter,
   user,
   setDateFilter,
 }) => {
-  // const handleGetTodayEvents = () => {
-  //   let today = new Date(Date.now()).toLocaleDateString("af-ZA");
-  //   setEventsList(eventsList.filter((event) => event.date === today));
-  // };
-
-  // const handleGetAllEvents = () => {
-  //   setEventsList(allEvents);
-  // };
-
   const handleSetFilter = (e) => {
     setFilter(e.target.value);
   };
@@ -35,12 +22,6 @@ export const Nav = ({
   return (
     <div className={styles.nav}>
       <ul className={styles.ul}>
-        {/* <Link to="/">
-          <li onClick={handleGetAllEvents} className={styles.li}>
-            Inici
-          </li>
-        </Link> */}
-
         <li className={styles.li}>
           <select className={styles.filter} onChange={handleSetDateFilter}>
             <option value={Infinity}>Data</option>
