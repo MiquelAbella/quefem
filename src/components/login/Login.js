@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styles from "./Login.module.css";
 import axios from "axios";
 
 export const Login = ({ setIsLoginShown, setUser }) => {
   const [isLoging, setIsLoging] = useState(true);
+
+
+  const getCoords = (e) => {
+    console.log(e);
+  };
 
   const [loginValues, setLoginValues] = useState({
     lemail: "",

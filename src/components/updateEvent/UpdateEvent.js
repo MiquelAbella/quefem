@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import ReactMapGl, { Marker } from "react-map-gl";
 import { useNavigate } from "react-router-dom";
 import styles from "./UpdateEvent.module.css";
 import axios from "axios";
 
-export const UpdateEvent = ({ user, eventToUpdate }) => {
+export const UpdateEvent = ({
+  user,
+  eventToUpdate,
+  setEventsList,
+  eventsList,
+}) => {
   const {
     title,
     place,
@@ -14,6 +20,7 @@ export const UpdateEvent = ({ user, eventToUpdate }) => {
     description,
     category,
     image,
+    coordinates,
   } = eventToUpdate;
 
   let navigate = useNavigate();
@@ -27,9 +34,23 @@ export const UpdateEvent = ({ user, eventToUpdate }) => {
     description: description,
     category: category,
     image: image,
+    location: coordinates,
   });
+  console.log(formValues);
+  const getCoords = (e) => {
+    setFormValues({
+      ...formValues,
+      location: [e.lngLat.lat, e.lngLat.lng],
+    });
+  };
 
-  
+  const viewport = useRef({
+    latitude: 41.6173,
+    longitude: 0.6292,
+    zoom: 11,
+    height: "40vh",
+    width: "90vw",
+  });
 
   const handleFormChange = (e) => {
     if (e.target.id === "upload-img") {
@@ -42,31 +63,39 @@ export const UpdateEvent = ({ user, eventToUpdate }) => {
   const submitForm = async (e) => {
     e.preventDefault();
     if (!Object.values(formValues).filter((val) => val === "").length) {
-      if (!formValues.image.includes("cloudinary")) {
-        const formData = new FormData();
-        formData.append("file", formValues.image);
-        formData.append("upload_preset", "pgckkypy");
-        await axios
-          .post(
-            "https://api.cloudinary.com/v1_1/dfjelhshb/image/upload/",
-            formData
-          )
-          .then((res) => (formValues.image = res.data.url));
-      }
+      const formData = new FormData();
+      formData.append("file", formValues.image);
+      formData.append("upload_preset", "pgckkypy");
+      await axios
+        .post(
+          "https://api.cloudinary.com/v1_1/dfjelhshb/image/upload/",
+          formData
+        )
+        .then((res) => (formValues.image = res.data.url));
+
       axios
-        .post("https://quefem.herokuapp.com/updateEvent", {
-          eventToUpdate,
+        .post("http://localhost:5000/updateEvent", {
           formValues,
+          _id: eventToUpdate._id,
           user: user.uid,
         })
-        .then(() => navigate("/", { replace: true }));
+        .then((res) => {
+         
+          setEventsList([
+            ...eventsList.filter((evt) => evt._id !== eventToUpdate._id),
+            res.data.event,
+          ]);
+        })
+        .then(() => {
+          navigate("/", { replace: true });
+        });
     } else {
       console.log("fill all camps");
     }
   };
 
   return (
-    <div className={styles.updateEvent}>
+    <div className={styles.addEvent}>
       <form className={styles.form} onSubmit={submitForm}>
         <input
           onChange={handleFormChange}
@@ -76,14 +105,16 @@ export const UpdateEvent = ({ user, eventToUpdate }) => {
           type="text"
           placeholder="Títol"
         />
-        <input
-          onChange={handleFormChange}
-          name="place"
-          value={formValues.place}
-          className={styles.input}
-          type="text"
-          placeholder="Lloc"
-        />
+        <div className={styles.inputGroup}>
+          <input
+            onChange={handleFormChange}
+            name="place"
+            value={formValues.place}
+            className={styles.input}
+            type="text"
+            placeholder="Adreça"
+          />
+        </div>
         <input
           onChange={handleFormChange}
           name="date"
@@ -151,15 +182,35 @@ export const UpdateEvent = ({ user, eventToUpdate }) => {
             <option value="altres">Altres</option>
           </select>
         </div>
-        <p className={styles.imageMsg}>
-          *Si no selecciones una imatge, es matindrà l'anterior.
-        </p>
         <input
           type="file"
           id="upload-img"
           onChange={handleFormChange}
           name="image"
         />
+        <p className={styles.imageMsg}>
+          *Si la imatge no és quadrada, es retallarà.
+        </p>
+        <div className={styles.mapGroup}>
+          <p>Clica al mapa per afegir la ubicació</p>
+          <ReactMapGl
+            onClick={getCoords}
+            style={{ width: "90vw", height: "40vh" }}
+            mapStyle="mapbox://styles/mapbox/streets-v9"
+            {...viewport.current}
+            ref={viewport}
+            mapboxAccessToken="pk.eyJ1IjoibWlrZWJlZWdhciIsImEiOiJja3c1NXJ1bm0wNDZtMnZsNWZyemI2MDNhIn0.bUNhmu4ASbT7GIb25uExSw"
+            onMove={(viewport) => {
+              viewport.current = viewport;
+            }}
+          >
+            <Marker
+              key="location"
+              latitude={formValues.location.lng}
+              longitude={formValues.location.lat}
+            ></Marker>
+          </ReactMapGl>
+        </div>
 
         <button type="submit">Afegeix</button>
       </form>

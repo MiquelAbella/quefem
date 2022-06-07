@@ -4,6 +4,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { Main } from "./components/main/Main";
 import { Nav } from "./components/nav/Nav";
+import { Map } from "./components/map/Map";
 import { Login } from "./components/login/Login";
 import { AddEvent } from "./components/addEvent/AddEvent";
 import { UpdateEvent } from "./components/updateEvent/UpdateEvent";
@@ -18,9 +19,9 @@ function App() {
   const [allEvents, setallEvents] = useState([]);
   const [filter, setFilter] = useState("Tots");
   const [dateFilter, setDateFilter] = useState(Infinity);
-
+  const [lastPage, setLastPage] = useState("/");
   const [isLoading, setIsLoading] = useState(true);
-
+  console.log(lastPage);
   useEffect(() => {
     axios
       .get("https://quefem.herokuapp.com/getEvents")
@@ -46,10 +47,11 @@ function App() {
         setIsLoading(false);
       });
   }, []);
-
+  console.log(eventsList);
   return (
     <div className="App">
       <Nav
+        setLastPage={setLastPage}
         user={user}
         setFilter={setFilter}
         setDateFilter={setDateFilter}
@@ -69,6 +71,27 @@ function App() {
         <Route
           path="/"
           element={
+            <Map
+              eventsList={eventsList}
+              setCurrentEvent={setCurrentEvent}
+              user={user}
+            />
+          }
+        >
+          <Route
+            path="/"
+            element={
+              <Map
+                eventsList={eventsList}
+                setCurrentEvent={setCurrentEvent}
+                user={user}
+              />
+            }
+          />
+        </Route>
+        <Route
+          path="/events"
+          element={
             <Main
               dateFilter={dateFilter}
               filter={filter}
@@ -81,7 +104,7 @@ function App() {
           }
         >
           <Route
-            path="/"
+            path="/events"
             element={
               <Main
                 setEventToUpdate={setEventToUpdate}
@@ -91,22 +114,56 @@ function App() {
             }
           />
         </Route>
-        <Route path="/afegir" element={<AddEvent user={user} />}>
-          <Route path="/afegir" element={<AddEvent user={user} />} />
+        <Route
+          path="/afegir"
+          element={
+            <AddEvent
+              user={user}
+              setEventsList={setEventsList}
+              eventsList={eventsList}
+            />
+          }
+        >
+          <Route
+            path="/afegir"
+            element={
+              <AddEvent
+                user={user}
+                setEventsList={setEventsList}
+                eventsList={eventsList}
+              />
+            }
+          />
         </Route>
         <Route
           path="/edita"
-          element={<UpdateEvent eventToUpdate={eventToUpdate} user={user} />}
+          element={
+            <UpdateEvent
+              eventToUpdate={eventToUpdate}
+              user={user}
+              setEventsList={setEventsList}
+              eventsList={eventsList}
+            />
+          }
         >
           <Route
             path="/edita"
-            element={<UpdateEvent eventToUpdate={eventToUpdate} user={user} />}
+            element={
+              <UpdateEvent
+                eventToUpdate={eventToUpdate}
+                user={user}
+                setEventsList={setEventsList}
+                eventsList={eventsList}
+              />
+            }
           />
         </Route>
         <Route path="event">
           <Route
             path=":id"
-            element={<EventInfo currentEvent={currentEvent} />}
+            element={
+              <EventInfo currentEvent={currentEvent} lastPage={lastPage} />
+            }
           />
         </Route>
       </Routes>

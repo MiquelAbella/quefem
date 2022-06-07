@@ -1,0 +1,28 @@
+.mapContainer {
+  margin: 5vh;
+  height: 80vh;
+  width: 80vw;
+}
+
+.marker {
+  background-image: url("../../assets/locationIcon.png");
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.addButton {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 2vh;
+  z-index: 2;
+}
+
+.addButtonImg {
+  background-color: rgb(26, 26, 26);
+  border-radius: 50%;
+  height: 8vh;
+}
