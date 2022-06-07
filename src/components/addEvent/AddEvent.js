@@ -71,7 +71,7 @@ export const AddEvent = ({ user, setEventsList, eventsList }) => {
         .then((res) => (formValues.image = res.data.url));
 
       axios
-        .post("http://localhost:5000/createEvent", {
+        .post("https://quefem.herokuapp.com/createEvent", {
           formValues,
           user: user.uid,
         })

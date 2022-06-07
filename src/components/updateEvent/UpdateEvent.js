@@ -74,13 +74,12 @@ export const UpdateEvent = ({
         .then((res) => (formValues.image = res.data.url));
 
       axios
-        .post("http://localhost:5000/updateEvent", {
+        .post("https://quefem.herokuapp.com/updateEvent", {
           formValues,
           _id: eventToUpdate._id,
           user: user.uid,
         })
         .then((res) => {
-         
           setEventsList([
             ...eventsList.filter((evt) => evt._id !== eventToUpdate._id),
             res.data.event,
