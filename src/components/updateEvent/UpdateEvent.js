@@ -1,5 +1,8 @@
+
+/*eslint import/no-webpack-loader-syntax: off*/
 import React, { useState, useRef, useEffect } from "react";
-import ReactMapGl, { Marker } from "react-map-gl";
+// @ts-ignore
+import ReactMapGl, { Marker } from "!react-map-gl";
 import { useNavigate } from "react-router-dom";
 import styles from "./UpdateEvent.module.css";
 import axios from "axios";

@@ -1,5 +1,7 @@
+/*eslint import/no-webpack-loader-syntax: off*/
 import React, { useRef, useEffect, useState } from "react";
-import ReactMapGl, { Marker } from "react-map-gl";
+// @ts-ignore
+import ReactMapGl, { Marker } from "!react-map-gl";
 import { useNavigate, Link } from "react-router-dom";
 import styles from "./Map.module.css";
 import addButton from "../../assets/addButton.png";
